@@ -28,20 +28,20 @@ public class PlayerFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Fire();
-        FireRay();
-
-        
-        if (lr.enabled)
-            curTime += Time.deltaTime;
-
-        if (curTime >= 1.0f)
-            RayRemove();
+        //Fire();
+        //FireRay();
+        //
+        //
+        //if (lr.enabled)
+        //    curTime += Time.deltaTime;
+        //
+        //if (curTime >= 1.0f)
+        //    RayRemove();
 
     }
 
     //총알 발사
-    private void Fire()
+    public void Fire()
     {
         ////마우스 왼쪽 버튼 or 왼쪽 컨트롤 키
         //if(Input.GetButtonDown("Fire1"))
@@ -60,57 +60,66 @@ public class PlayerFire : MonoBehaviour
     //레이저 발사
     private void FireRay()
     {
-        if (lr.enabled) return;
-
-        Debug.DrawRay(transform.position, transform.up * 10, Color.green);
-
-        //마우스 왼쪽 버튼 or 왼쪽 컨트롤 키
-        if (Input.GetButtonDown("Fire1"))
-        {
-            RaycastHit hitInfo;
-
-            //라인렌더러 컴포넌트 활성화
-            lr.enabled = true;
-            //라인 시작점, 끝점
-            lr.SetPosition(0, transform.position);
-
-            if (Physics.Raycast(transform.position, transform.up, out hitInfo))
-            {
-                
-                lr.SetPosition(1, hitInfo.point);
-
-                //충돌된 오브젝트 삭제
-                //Destroy(hitInfo.collider.gameObject);
-
-                //디스트로이존의 탑과는 충돌처리 되지 않도록 한다.
-                //if(hitInfo.collider.name != "top")
-                //{
-                //    Destroy(hitInfo.collider.gameObject);
-                //}
-
-                //에너미가 이름에 붙어 있으면 삭제
-                //프리팹으로 만든 오브젝트 같은 경우는 생성될 때 클론으로 생성된다.
-                //Contains(" ") => Enemy(clone) 이런 것도 포함함
-                if(hitInfo.collider.name.Contains("Enemy"))
-                {
-                    Destroy(hitInfo.collider.gameObject);
-                }
-
-            }
-            else
-            {
-                lr.SetPosition(1, transform.position + Vector3.up * 10);
-            }
-        }
+        //if (lr.enabled) return;
+        //
+        //Debug.DrawRay(transform.position, transform.up * 10, Color.green);
+        //
+        ////마우스 왼쪽 버튼 or 왼쪽 컨트롤 키
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    RaycastHit hitInfo;
+        //
+        //    //라인렌더러 컴포넌트 활성화
+        //    lr.enabled = true;
+        //    //라인 시작점, 끝점
+        //    lr.SetPosition(0, transform.position);
+        //
+        //    if (Physics.Raycast(transform.position, transform.up, out hitInfo))
+        //    {
+        //        
+        //        lr.SetPosition(1, hitInfo.point);
+        //
+        //        //충돌된 오브젝트 삭제
+        //        //Destroy(hitInfo.collider.gameObject);
+        //
+        //        //디스트로이존의 탑과는 충돌처리 되지 않도록 한다.
+        //        //if(hitInfo.collider.name != "top")
+        //        //{
+        //        //    Destroy(hitInfo.collider.gameObject);
+        //        //}
+        //
+        //        //에너미가 이름에 붙어 있으면 삭제
+        //        //프리팹으로 만든 오브젝트 같은 경우는 생성될 때 클론으로 생성된다.
+        //        //Contains(" ") => Enemy(clone) 이런 것도 포함함
+        //        if(hitInfo.collider.name.Contains("Enemy"))
+        //        {
+        //            Destroy(hitInfo.collider.gameObject);
+        //        }
+        //
+        //    }
+        //    else
+        //    {
+        //        lr.SetPosition(1, transform.position + Vector3.up * 10);
+        //    }
+        //}
 
     }
 
     //Ray지우기
-    private void RayRemove()
-    {
-        //라인렌더러 컴포넌트 비활성화
-        lr.enabled = false;
-        curTime = 0.0f;
-    }
+    //private void RayRemove()
+    //{
+    //    //라인렌더러 컴포넌트 비활성화
+    //    lr.enabled = false;
+    //    curTime = 0.0f;
+    //}
 
+    //파이어버튼 클릭시
+    public void OnFireButtonClick()
+    {
+        //총알 게임오브젝트 생성
+        GameObject bullet = Instantiate(bulletFactory);
+        //총알 오브젝트의 위치 지정
+        //bullet.transform.position = transform.position;
+        bullet.transform.position = firePoint.transform.position;
+    }
 }

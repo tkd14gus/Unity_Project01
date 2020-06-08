@@ -18,6 +18,11 @@ public class Boss : MonoBehaviour
     private float curTime1 = 0.0f;
     public int bulletMax = 10;
 
+    //체력
+    public int hp = 100;
+
+    Rigidbody rigidbody;
+
     // Update is called once per frame
     void Update()
     {
@@ -69,6 +74,22 @@ public class Boss : MonoBehaviour
                 //타이머 초기화
                 curTime1 = 0.0f;
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+       
+        Destroy(collision.gameObject);
+        hp -= 5;
+        rigidbody = gameObject.GetComponent<Rigidbody>();
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+            //score = GetComponent<Score>();
+            Score.score.NowScore += 100;
         }
     }
 }
