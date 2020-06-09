@@ -21,8 +21,6 @@ public class Boss : MonoBehaviour
     //체력
     public int hp = 100;
 
-    Rigidbody rigidbody;
-
     // Update is called once per frame
     void Update()
     {
@@ -82,13 +80,10 @@ public class Boss : MonoBehaviour
        
         Destroy(collision.gameObject);
         hp -= 5;
-        rigidbody = gameObject.GetComponent<Rigidbody>();
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.angularVelocity = Vector3.zero;
+
         if (hp <= 0)
         {
             Destroy(gameObject);
-            //score = GetComponent<Score>();
             Score.score.NowScore += 100;
         }
     }
