@@ -7,7 +7,7 @@ public class BGMMgr : MonoBehaviour
     //BGMMgr 싱글톤 만들기
     //모든씬에서 사용가능해야 하니 BGMMgr를 삭제하면 안된다.
     public static BGMMgr Instance;  //BGMMgr 싱글톤 인스턴스
-
+    
     private void Awake()
     {
         if(Instance)

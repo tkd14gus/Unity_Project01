@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Score.score.ScoreChange();
+
         margin = new Vector2(0.08f, 0.05f);
     }
 

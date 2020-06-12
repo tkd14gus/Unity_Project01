@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class DestroyZone : MonoBehaviour
 {
+    private PlayerFire pf;
+    private EnemyManager em;
+    private EBBulletManager ebbm;
+
+    void Awake()
+    {
+        pf = GameObject.Find("Player").GetComponent<PlayerFire>();
+        em = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
+        ebbm = GameObject.Find("EBBulletManager").GetComponent<EBBulletManager>();
+    }
     //트리거 잠지 후 해당 오브젝트 삭제
     private void OnTriggerEnter(Collider other)
     {
@@ -27,13 +37,32 @@ public class DestroyZone : MonoBehaviour
         //}
 
         //충돌된 오브젝트가 총알이라면 총알풀에 추가한다.
-        if (other.gameObject.name.Contains("Bullet"))
+        if (other.gameObject.name.Contains("Missile"))
         {
             //총알 오브젝트는 비활성화 한다.
             other.gameObject.SetActive(false);
             //오브젝트풀에 추가만 해준다.
-            PlayerFire pf = GameObject.Find("Player").GetComponent<PlayerFire>();
             pf.BulletPool = other.gameObject;
         }
+
+        if(other.gameObject.name.Contains("Enemy"))
+        {
+            //에너미 오브젝트는 비활성화 한다.
+            other.gameObject.SetActive(false);
+            //오브젝트풀에 추가만 해준다.
+            if (em.gameObject.activeSelf)
+                em.EnemyPool = other.gameObject;
+            else
+                Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.name.Contains("Bullet_B"))
+        {
+            //총알 오브젝트는 비활성화 한다.
+            other.gameObject.SetActive(false);
+            //오브젝트풀에 추가만 해준다.
+            ebbm.BULLETPOOL = other.gameObject;
+        }
+
     }
 }

@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    public static Score score = null;
+    public static Score score;
 
     private int heightScore = 0;
     private int nowScore = 0;
 
-    public Text heightText;
-    public Text nowText;
+    private Text heightText;
+    private Text nowText;
 
 
     public int NowScore
@@ -33,7 +33,7 @@ public class Score : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            DestroyImmediate(gameObject);
         }
          
     }
@@ -41,21 +41,25 @@ public class Score : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        heightScore = PlayerPrefs.GetInt("heightScore", heightScore);
-
         ScoreChange();
-
     }
 
-    private void ScoreChange()
+    public void ScoreChange()
     {
+        if(heightText == null)
+        {
+            heightText = GameObject.Find("HeightScoreNum").GetComponent<Text>();
+            nowText = GameObject.Find("NowScoreNum").GetComponent<Text>();
+        }
+        heightScore = PlayerPrefs.GetInt("heightScore", heightScore);
+
         if (heightScore < nowScore)
         {
             heightScore = nowScore;
             PlayerPrefs.SetInt("heightScore", heightScore);
         }
 
-        heightText.text = heightScore.ToString();
-        nowText.text = nowScore.ToString();
+        heightText.text = "최고 스코어 : " + heightScore.ToString();
+        nowText.text = "현재 스코어 : " + nowScore.ToString();
     }
 }

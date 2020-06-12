@@ -14,12 +14,12 @@ TagManager:
   - 
   - 
   - Player
-  - Eenemy
+  - Enemy
   - Bullet
   - DestrroyZone
   - Boss
   - Bullet_B
-  - 
+  - MiniGun
   - 
   - 
   - 

@@ -59,7 +59,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057fa93c70f9d2640a5657717b7deb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3
+  curTime: 0
+  fireTime: 2
+  bulletFactory: {fileID: 5088478248614671559, guid: c5bab97d958f60146b6d1873566608c2,
+    type: 3}
   fxFactory: {fileID: 100006, guid: 4a3cea52e77f9f6409e285526c47e975, type: 3}
 --- !u!54 &5678503188009274961
 Rigidbody:
@@ -75,7 +79,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1001 &4274663323134342890
 PrefabInstance:
