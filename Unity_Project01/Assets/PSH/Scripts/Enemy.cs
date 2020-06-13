@@ -114,13 +114,12 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
             //아이템 생성
-            //if (Random.Range(0, 59) % 10 == 0)
-            //{
+            if (Random.Range(0, 59) % 10 == 0)
+            {
                 GameObject go = im.ITEMPOOL;
                 go.SetActive(true);
                 go.transform.position = gameObject.transform.position;
-                //go.transform.up = transform.up;
-            //}
+            }
 
             //에너미는 돌려주고, 총알도 돌려준다.
             gameObject.SetActive(false);
